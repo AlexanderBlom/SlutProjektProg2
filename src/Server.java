@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -17,22 +16,30 @@ public class Server {
             while(true){
                 System.out.println("Waiting for connections!");
                 socket = serverSocket.accept();
-
+                System.out.println("Connecting...");
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-                String name = in.readLine();
+                String msg = in.readLine();
+                System.out.println(msg);
+                String key = in.readLine();
+                System.out.println(key);
 
-                if (name.equals("Shutdown")){
-                    in.close();
-                    out.close();
-                    socket.close();
-                    System.exit(0);
+                int[] crypt = new int[msg.length()];
+                for (int i = 0; i < msg.length(); i++) {
+                    if (msg.length() > key.length()) key += key;
+                    crypt[i] = msg.charAt(i) ^ key.charAt(i);
                 }
 
-                System.out.println("Client name is " + name);
 
-                out.println("SERVER: Welcome " + name);
+                StringBuilder sb = new StringBuilder();
+                for(int i = 0; i < crypt.length; i++){
+                    sb.append((char) crypt[i]);
+                }
+
+                String cryptMsg = sb.toString();
+                System.out.println(cryptMsg);
+                out.println(cryptMsg);
 
                 in.close();
                 out.close();
@@ -41,6 +48,7 @@ public class Server {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Server fail");
         }
 
     }
