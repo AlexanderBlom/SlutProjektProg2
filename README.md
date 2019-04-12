@@ -7,6 +7,6 @@ Planering:
 
 ## Loggbok:
 2019-04-12
-*Skapade GUI, Model och Controller till servern och klienten istället för att använda JOptionPane.
-*Jag har inte hunnit få de att fungera än.
-*Behöver planera i mindre steg hur jag ska lösa problemet.
+* Skapade GUI, Model och Controller till servern och klienten istället för att använda JOptionPane.
+* Jag har inte hunnit få de att fungera än.
+* Behöver planera i mindre steg hur jag ska lösa problemet.
