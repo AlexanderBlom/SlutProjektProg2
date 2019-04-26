@@ -5,19 +5,15 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Client {
+    private String ip;
+    private int port;
+    private Socket socket;
+
     public static void main(String[] args) {
-        String ip = JOptionPane.showInputDialog(null, "IP?", "Connect to...", JOptionPane.QUESTION_MESSAGE);
-        int port = Integer.parseInt(JOptionPane.showInputDialog(null, "port", "Connect to..", JOptionPane.QUESTION_MESSAGE));
-        Socket socket = null;
 
-        try {
-            socket = new Socket(ip, port);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Client failed to connect");
-        }
 
-        try {
+
+       /* try {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
@@ -29,12 +25,25 @@ public class Client {
             System.out.println(msg);
             JOptionPane.showMessageDialog(null, msg, "Server said", JOptionPane.INFORMATION_MESSAGE);
 
+
             in.close();
             out.close();
             socket.close();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Client has failed to communicate");
+        }*/
+    }
+
+    public void connect(String ip, int port) {
+        this.ip = ip;
+        this.port = port;
+
+        try {
+            socket = new Socket(ip, port);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Client failed to connect");
         }
     }
 }
