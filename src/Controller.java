@@ -20,14 +20,14 @@ public class Controller {
         frame.setResizable(false);
         frame.setVisible(true);
 
-        this.view.addCryptListener(new ButtonListener());
+        this.view.addCryptListener(new CryptListener());
         this.view.addConnectListener(new ConnectListener());
     }
 
-    class ButtonListener implements ActionListener{
+    class CryptListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            view.setCryptArea(client.crypt(view.getMsg(), view.getKey()));
         }
     }
 

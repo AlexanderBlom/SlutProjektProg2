@@ -1,18 +1,14 @@
 import javax.swing.*;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Client {
-    private String ip;
-    private int port;
-    private Socket socket;
 
-    public static void main(String[] args) {
-
-
-
+    PrintWriter out;
+    BufferedReader in;
        /* try {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -33,17 +29,37 @@ public class Client {
             e.printStackTrace();
             System.out.println("Client has failed to communicate");
         }*/
-    }
 
     public void connect(String ip, int port) {
-        this.ip = ip;
-        this.port = port;
-
+        Socket socket = null;
         try {
             socket = new Socket(ip, port);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Client failed to connect");
         }
+
+        try {
+            out = new PrintWriter(socket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JOptionPane.showMessageDialog(null, "Du är nu ansluten till servern");
+    }
+    
+
+    public String crypt(String msg, String key) {
+        String crypt = null;
+        out.println(msg);
+        out.println(key);
+
+        try {
+            crypt = in.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return crypt;
     }
 }
