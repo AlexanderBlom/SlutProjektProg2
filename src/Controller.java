@@ -22,6 +22,7 @@ public class Controller {
 
         this.view.addCryptListener(new CryptListener());
         this.view.addConnectListener(new ConnectListener());
+        this.view.addOpenListener(new OpenListener());
     }
 
     class CryptListener implements ActionListener{
@@ -37,6 +38,13 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
            client.connect(view.getIp(), view.getPort());
+        }
+    }
+
+    class OpenListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.setCryptArea(client.openFile());
         }
     }
 }

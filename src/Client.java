@@ -1,8 +1,5 @@
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 public class Client {
@@ -52,14 +49,58 @@ public class Client {
 
     public String crypt(String msg, String key) {
         String crypt = null;
-        out.println(msg);
-        out.println(key);
+        if(key.isEmpty() && msg.isEmpty()) JOptionPane.showMessageDialog(null, "Du måste ange en nyckel och meddelande");
+
+        else if(key.isEmpty()) JOptionPane.showMessageDialog(null, "Du måste ange en nyckel");
+
+        else if (msg.isEmpty()) JOptionPane.showMessageDialog(null, "Du måste ange ett meddelande");
+
+            out.println(msg);
+            out.println(key);
+
+            try {
+                crypt = in.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return crypt;
+        }
+
+    public String openFile(){
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        String fileName = chooser.getSelectedFile().getName();
+
+        System.out.println(fileName);
+
+        FileReader fr = null;
+        try {
+            fr = new FileReader(fileName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        BufferedReader inFil = new BufferedReader(fr);
+
+        StringBuilder sb = new StringBuilder();
+
+        String i = "";
 
         try {
-            crypt = in.readLine();
+            i = inFil.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return crypt;
+
+        while(i != null) {
+            sb.append(i);
+            try {
+                i = inFil.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        String file = sb.toString();
+        return file;
     }
 }
