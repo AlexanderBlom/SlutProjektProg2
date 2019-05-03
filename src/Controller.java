@@ -27,7 +27,9 @@ public class Controller {
     class CryptListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.setCryptArea(client.crypt(view.getMsg(), view.getKey()));
+            if(!view.getKey().isEmpty() && !view.getMsg().isEmpty())
+                view.setCryptArea(client.crypt(view.getMsg(), view.getKey()));
+            else JOptionPane.showMessageDialog(null, "Du måste ange en nyckel och meddelande");
         }
     }
 
