@@ -49,11 +49,6 @@ public class Client {
 
     public String crypt(String msg, String key) {
         String crypt = null;
-        if(key.isEmpty() && msg.isEmpty()) JOptionPane.showMessageDialog(null, "Du måste ange en nyckel och meddelande");
-
-        else if(key.isEmpty()) JOptionPane.showMessageDialog(null, "Du måste ange en nyckel");
-
-        else if (msg.isEmpty()) JOptionPane.showMessageDialog(null, "Du måste ange ett meddelande");
 
             out.println(msg);
             out.println(key);
@@ -69,7 +64,7 @@ public class Client {
     public String openFile(){
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
-        String fileName = chooser.getSelectedFile().getName();
+        String fileName = chooser.getSelectedFile().getAbsolutePath();
 
         System.out.println(fileName);
 
@@ -92,7 +87,7 @@ public class Client {
         }
 
         while(i != null) {
-            sb.append(i);
+            sb.append(i + "\n");
             try {
                 i = inFil.readLine();
             } catch (IOException e) {
