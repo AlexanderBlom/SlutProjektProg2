@@ -15,6 +15,6 @@ Planering:
 * Klienten har nu ett GUI som kan användas för att ansluta till servern. Sedan kan klienten skicka meddelande samt nyckel för att kryptera
 * Nästa steg är att kunna skicka filer till servern som den krypterar.
 
-2019-04-03
+2019-05-03
 * Påbörjade metoden för att öppna filer
 * Använder FileChooser men måste komma på hur programmet ska hitta filen.
