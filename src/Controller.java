@@ -7,6 +7,11 @@ public class Controller {
     private GUI view;
     private Client client;
 
+    /**
+     * Class constructor
+     * @param view the GUI
+     * @param client the Model
+     */
     public Controller(GUI view, Client client){
         this.view = view;
         this.client = client;
@@ -25,6 +30,9 @@ public class Controller {
         this.view.addOpenListener(new OpenListener());
     }
 
+    /**
+     * A actionListener for the cryptButton.
+     */
     class CryptListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -34,6 +42,9 @@ public class Controller {
         }
     }
 
+    /**
+     * A actionListener for the connectButton.
+     */
     class ConnectListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -41,10 +52,13 @@ public class Controller {
         }
     }
 
+    /**
+     * A actionListener for the openButton.
+     */
     class OpenListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.setCryptArea(client.openFile());
+            view.setMsgArea(client.openFile());
         }
     }
 }

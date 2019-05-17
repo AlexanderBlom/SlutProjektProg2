@@ -2,31 +2,18 @@ import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 
+/**
+ *
+ */
 public class Client {
-
     PrintWriter out;
     BufferedReader in;
-       /* try {
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            out.println(JOptionPane.showInputDialog(null, "Vad är ditt meddelande?"));
-            out.println(JOptionPane.showInputDialog(null, "Vilken nyckel vill du använda??"));
-
-
-            String msg = in.readLine();
-            System.out.println(msg);
-            JOptionPane.showMessageDialog(null, msg, "Server said", JOptionPane.INFORMATION_MESSAGE);
-
-
-            in.close();
-            out.close();
-            socket.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Client has failed to communicate");
-        }*/
-
+    /**
+     * Connects the client to the server.
+     * @param ip the ip address used to connect to the server.
+     * @param port the port used to connect to the server.
+     */
     public void connect(String ip, int port) {
         Socket socket = null;
         try {
@@ -45,8 +32,13 @@ public class Client {
 
         JOptionPane.showMessageDialog(null, "Du är nu ansluten till servern");
     }
-    
 
+    /**
+     * Send the message and key used in encryption to the server.
+     * @param msg the message used in encryption.
+     * @param key the key used in encryption.
+     * @return the encrypted message.
+     */
     public String crypt(String msg, String key) {
         String crypt = null;
 
@@ -61,6 +53,10 @@ public class Client {
             return crypt;
         }
 
+    /**
+     * Uses JFileChooser to get the path for the file used in encryption.
+     * @return the content of the file as a string with line breaks.
+     */
     public String openFile(){
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);

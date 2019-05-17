@@ -6,9 +6,6 @@ import java.net.Socket;
 
 public class Server {
     public static void main(String[] args) {
-        ServerModel sm = new ServerModel();
-        ServerController sc = new ServerController(sm);
-
         int port = 2345;
         ServerSocket serverSocket;
         Socket socket;
@@ -25,9 +22,7 @@ public class Server {
 
 
                 String msg = in.readLine();
-                System.out.println(msg);
                 String key = in.readLine();
-                System.out.println(key);
 
                 //Kryptering
                 int[] crypt = new int[msg.length()];
